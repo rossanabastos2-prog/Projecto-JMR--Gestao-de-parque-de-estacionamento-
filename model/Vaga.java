@@ -7,8 +7,8 @@ package model;
  */
 public class Vaga {
 
-    private final int numero;
-    private final String tipo;          // "Carro" ou "Mota"
+    private int numero;
+    private String tipo;          // "Carro" ou "Mota"
     private boolean estaOcupada;
     private String matriculaAtual; // null se livre; matrícula do veículo se ocupada
 

@@ -12,8 +12,10 @@ public class MenuPrincipal {
         Dashboard dashboard = new Dashboard();
 
         try (Scanner scanner = new Scanner(System.in)) {
+
             int opcao = -1;
 
+            // Agora o sistema sai apenas quando escolher 6
             while (opcao != 6) {
 
                 exibirMenu();
@@ -29,7 +31,12 @@ public class MenuPrincipal {
                 }
 
                 switch (opcao) {
-                    case 1 -> {
+
+                    // ─────────────────────────────────────────────
+                    // 1. REGISTAR ENTRADA
+                    // ─────────────────────────────────────────────
+                    case 1:
+
                         System.out.print("\n  Digite a matrícula do veículo : ");
                         String matricula = scanner.nextLine().trim().toUpperCase();
 
@@ -41,8 +48,13 @@ public class MenuPrincipal {
                                 controller.registarEntrada(matricula, tipo));
 
                         pausar(scanner);
-                    }
-                    case 2 -> {
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // 2. REGISTAR SAÍDA
+                    // ─────────────────────────────────────────────
+                    case 2:
+
                         System.out.print("\n  Digite a matrícula para saída : ");
                         String matSaida = scanner.nextLine().trim().toUpperCase();
 
@@ -50,8 +62,13 @@ public class MenuPrincipal {
                         System.out.println(controller.registarSaida(matSaida));
 
                         pausar(scanner);
-                    }
-                    case 3 -> {
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // 3. DASHBOARD
+                    // ─────────────────────────────────────────────
+                    case 3:
+
                         dashboard.exibirDashboard(
                                 controller.getVagas(),
                                 controller.getSessaoStats(),
@@ -60,13 +77,23 @@ public class MenuPrincipal {
                         );
 
                         pausar(scanner);
-                    }
-                    case 4 -> {
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // 4. ESTADO DO PARQUE
+                    // ─────────────────────────────────────────────
+                    case 4:
+
                         controller.exibirEstadoParque();
 
                         pausar(scanner);
-                    }
-                    case 5 -> {
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // 5. EXPORTAR RELATÓRIO
+                    // ─────────────────────────────────────────────
+                    case 5:
+
                         System.out.println("\n  A exportar relatório da sessão...");
 
                         String ficheiro = controller.exportarRelatorio();
@@ -79,8 +106,13 @@ public class MenuPrincipal {
                         }
 
                         pausar(scanner);
-                    }
-                    case 6 -> {
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // 6. GUARDAR E SAIR
+                    // ─────────────────────────────────────────────
+                    case 6:
+
                         System.out.println("\n  A guardar dados do parque...");
 
                         boolean guardado = controller.guardarDados();
@@ -92,15 +124,23 @@ public class MenuPrincipal {
                         }
 
                         System.out.println("\n  A encerrar o sistema JMR... Até à próxima!\n");
-                    }
-                    default -> System.out.println("\n  ⚠ Opção inválida! Escolha entre 1 e 6.");
+                        break;
+
+                    // ─────────────────────────────────────────────
+                    // OPÇÃO INVÁLIDA
+                    // ─────────────────────────────────────────────
+                    default:
+
+                        System.out.println("\n  ⚠ Opção inválida! Escolha entre 1 e 6.");
+                        break;
                 }
- 
-                            }
+            }
         }
     }
 
-
+    // ─────────────────────────────────────────────────────
+    // MENU
+    // ─────────────────────────────────────────────────────
 
     private static void exibirMenu() {
 
@@ -119,6 +159,9 @@ public class MenuPrincipal {
         System.out.print("  Escolha uma opção: ");
     }
 
+    // ─────────────────────────────────────────────────────
+    // PAUSA
+    // ─────────────────────────────────────────────────────
 
     private static void pausar(Scanner scanner) {
 

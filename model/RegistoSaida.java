@@ -3,6 +3,11 @@ package model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Representa um registo imutável de uma saída de veículo.
+ * Usado para construir o histórico de transacções da sessão,
+ * que depois alimenta o relatório diário exportado.
+ */
 public class RegistoSaida {
 
     private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -25,6 +30,7 @@ public class RegistoSaida {
         this.valorPago   = valorPago;
     }
 
+    /** Linha formatada para o relatório .txt */
     public String toLinhaRelatorio() {
         long minutos = java.time.Duration.between(horaEntrada, horaSaida).toMinutes();
         return String.format("  %-14s | %-5s | Vaga %2d | Entrada: %s | Saída: %s | %3d min | %6.0f Kzs",
@@ -33,6 +39,7 @@ public class RegistoSaida {
                 minutos, valorPago);
     }
 
+    // ─── Getters ─────────────────────────────────────────────────────────────
     public String        getMatricula()  { return matricula; }
     public String        getTipo()       { return tipo; }
     public int           getNumeroVaga() { return numeroVaga; }

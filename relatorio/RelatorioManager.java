@@ -11,7 +11,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+/**
+ * ╔══════════════════════════════════════════════════════╗
+ * ║       RELATÓRIO DIÁRIO – JMR                    ║
+ * ║   Exporta um ficheiro .txt com o resumo completo     ║
+ * ║   da sessão: transacções, receitas e estatísticas.   ║
+ * ╚══════════════════════════════════════════════════════╝
+ *
+ * Ficheiro gerado: relatorio_YYYY-MM-DD.txt
+ * Camada: Infraestrutura / Relatório (fora do ciclo MVC principal).
+ * Chamado pelo Controller; nunca pela View.
+ */
 public class RelatorioManager {
 
     private static final DateTimeFormatter FMT_DATA_HORA =
@@ -19,9 +29,16 @@ public class RelatorioManager {
     private static final DateTimeFormatter FMT_DATA =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-
+    /**
+     * Exporta o relatório diário da sessão para um ficheiro .txt.
+     *
+     * @param registos   Lista de todas as saídas registadas na sessão
+     * @param stats      Estatísticas financeiras da sessão
+     * @return           Caminho do ficheiro gerado, ou null em caso de erro
+     */
     public String exportarRelatorio(List<RegistoSaida> registos, SessaoStats stats) {
 
+        // Nome do ficheiro: relatorio_2026-06-24.txt
         String nomeFicheiro = "relatorio_" + LocalDate.now() + ".txt";
 
         try (BufferedWriter w = new BufferedWriter(new FileWriter(nomeFicheiro))) {
@@ -39,6 +56,8 @@ public class RelatorioManager {
             return null;
         }
     }
+
+    // ─── Secções do relatório ────────────────────────────────────────────────
 
     private void escreverCabecalho(BufferedWriter w, SessaoStats stats) throws IOException {
         w.write("=".repeat(80)); w.newLine();
@@ -61,6 +80,7 @@ public class RelatorioManager {
         if (registos.isEmpty()) {
             w.write("  (Nenhuma saída registada nesta sessão.)"); w.newLine();
         } else {
+            // Cabeçalho da tabela
             w.write("  " + "-".repeat(76)); w.newLine();
             w.write(String.format("  %-14s | %-5s | %-6s | %-16s | %-16s | %5s | %10s",
                     "MATRÍCULA", "TIPO", "VAGA", "ENTRADA", "SAÍDA", "TEMPO", "VALOR"));
@@ -99,6 +119,7 @@ public class RelatorioManager {
         w.write("=".repeat(80)); w.newLine();
     }
 
+    // ─── Utilitário ──────────────────────────────────────────────────────────
 
     private String formatarDuracao(long minutos) {
         if (minutos < 60) return minutos + " min";
