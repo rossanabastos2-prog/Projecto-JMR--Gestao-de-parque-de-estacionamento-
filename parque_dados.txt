@@ -1,0 +1,13 @@
+# JMR - Dados do Parque
+# Formato vagas:    VAGA;numero;tipo;ocupado;matricula
+# Formato veiculos: VEICULO;matricula;tipo;numeroVaga;horaEntrada
+VAGA;1;Carro;true;LD-67-11-22
+VAGA;2;Carro;false;-
+VAGA;3;Carro;false;-
+VAGA;4;Carro;false;-
+VAGA;5;Carro;false;-
+VAGA;6;Mota;true;LD-22-22-22
+VAGA;7;Mota;false;-
+VAGA;8;Mota;false;-
+VEICULO;LD-67-11-22;Carro;1;2026-07-06T20:21:48.792333100
+VEICULO;LD-22-22-22;Mota;6;2026-07-06T20:23:49.117754800
